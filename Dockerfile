@@ -2,6 +2,20 @@ FROM php:7.1-fpm-alpine
 
 VOLUME ["/usr/local/etc", "/var/www/html"]
 
+
+
+# intall yaml
+RUN apk add --update \
+    yaml-dev \
+    openssl-dev \ 
+    imagemagick-dev \
+ && rm -rf /var/cache/apk/*
+
+RUN pecl install yaml-beta
+
+RUN docker-php-ext-enable yaml.so
+
+
 # Install dependencies
 RUN apk --no-cache --update add \
     libxml2-dev \
@@ -49,19 +63,7 @@ RUN docker-php-ext-install json \
     xml  \
     phar \
     gd
-
-# intall yaml
-RUN apk add --update \
-    yaml-dev \
-    openssl-dev \ 
-    imagemagick-dev \
- && rm -rf /var/cache/apk/*
-
-RUN pecl install yaml-beta
-
-RUN pecl install yaml-2.0.0
-
-RUN docker-php-ext-enable yaml.so && \  
+  
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
