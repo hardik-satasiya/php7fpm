@@ -61,7 +61,7 @@ RUN pecl install yaml-beta
 
 RUN pecl install yaml-2.0.0
 
-RUN docker-php-ext-enable yaml.so && \
+RUN docker-php-ext-enable yaml.so && \  
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
