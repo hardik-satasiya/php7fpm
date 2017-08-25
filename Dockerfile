@@ -7,8 +7,6 @@ RUN apk add --update \
     yaml-dev \
     && rm -rf /var/cache/apk/*
 
-RUN pecl install yaml-2.0.0
-
 RUN docker-php-ext-enable yaml.so && \  
 
 # Install dependencies
